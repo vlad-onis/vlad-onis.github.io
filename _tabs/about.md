@@ -13,4 +13,4 @@ This blog represents just my effort to transform my hand written notes(yes I kno
 counter part, hoping that other people or my future self will benefit from what is written here.
 
 Besides Rust and technical stuff, I'm into wooden musical instruments like guitars, traditional flutes and others. Sportwise 
-I'm still trying to improve the ways in which I move this (older and older) body; talk to me about climbing 🧗‍♀️
+I'm still trying to improve the ways in which I move this (older and older) body; talk to me about climbing. 🧗‍♀️
