@@ -34,7 +34,7 @@ println!("{a}"); // This line will cause the error below.
 ![Move_Error](/assets/img/borrow-of-a-lifetime-resources/move_string_error.png)
 <br>
 As we can see above, we are not allowed to reuse a moved value. The rust compiler won't 
-even compile our code to protect us from common bugs caused by moved values. It's errors are very verbose and
+even compile our code to protect us from common bugs caused by moved values. Its errors are very verbose and
 besides the colored description of why it failed to compile it comes with a suggestion of what you should 
 do in this case(a.k.a clone the string instead of moving it). <br>
 
