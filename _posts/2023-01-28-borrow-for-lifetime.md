@@ -32,15 +32,15 @@ println!("{a}"); // This line will cause the error below.
 ```
 <br>
 ![Move_Error](/assets/img/borrow-of-a-lifetime-resources/move_string_error.png)
-
-As we can see above, we are not allowed to reuse a moved value. The rust compiler in this case won't 
-even compile our code so we avoid common bugs caused by moved values. It's errors are very verbose and
+<br>
+As we can see above, we are not allowed to reuse a moved value. The rust compiler won't 
+even compile our code to protect us from common bugs caused by moved values. It's errors are very verbose and
 besides the colored description of why it failed to compile it comes with a suggestion of what you should 
 do in this case(a.k.a clone the string instead of moving it). <br>
 
 ## Borrow
 
-What if we do not want to move the value out of our variable and we don't want to clone (Cloning is an expensive
+What if we do not want to move the value out of our variable and we don't want to clone it either (Cloning is an expensive
 operation and involves another allocation)?
 
 Rust allows you to borrow values, by creating a reference to them. 
@@ -88,7 +88,7 @@ let c2 = &c;
 
 ## Lifetimes
 
-Lifetimes are the reason the above code compiles and runs (if we omit the print statement). Why is that? Rust
+Lifetimes are the reason the above code compiles and runs (without the print statement of course). Why is that? Rust
 attributes each value a lifetime and it tracks each lifetime throughout your codebase. A lifetime is defined 
 by 2 boundaries:
 
@@ -99,19 +99,19 @@ Rust applies the RAII principle to determine when a lifetime should end, and kee
 graph-like structure.
 
 In the above example the life of c1 starts where we declare the variable and ends in the same place because there
-is no usage of c1 after that line, hence we can borrow c again in the next line with a shared reference. 
+is no usage of c1 after that line. Hence we can borrow c again in the next line as a shared reference. 
 
-If we uncomment the print statement below, the compiler figures out that the lifetime of c1 did not end so it 
+If we uncomment the print statement, the compiler figures out that the lifetime of c1 did not end so it 
 won't allow a shared reference before that point.
 
 
 ### Temporary values
 
-Let's take a look at a tricky lifetime example.
+Let's take a look at a more tricky lifetime example.
 
-We will define a function that takes argument a reference to a string and return a reference to a string as well
-When a reference is returned Rust will try to infer the lifetime of that reference based on its lifetime rules.
-We won't go into those rules, but in our specific case, the compiler will be able to infer the lifetime of our
+We will define a function that takes as argument a reference to a string and returns it in the end.
+When a reference is returned Rust will try to infer its lifetime (we won't cover the lifetime elision rules in this post).
+In our specific case the compiler will be able to infer the lifetime of our
 return value.
 
 ```rust
@@ -134,15 +134,15 @@ fn main() {
 <br>
 ![Temporary_Error](/assets/img/borrow-of-a-lifetime-resources/temporary_error.png)
 
-In the snippet above the commented lines follow the compiler suggestion of defining the variable firs and then calling
+In the snippet above the commented lines follow the compiler suggestion of defining the variable first and then calling
 the function. In our case, we create the String inside the function call and take it's reference, then the String will
-be dropped. Our function will try to return a reference to a dropped String, which makes the rust compiler very unhappy.
-The rust compiler sees you are trying to use (print to the console) the borrowed value which was freed during the function
-call.
+be dropped. The function will try to return a reference to a dropped String, which makes the rust compiler very unhappy.
+The compiler notices you are trying to use (print to the console) the borrowed value which was freed during the function
+call, hence the error.
 
 
 ## Conclusion
 
-Eversince I started learning Rust I felt like I learned to use some computer science concepts (such as references or lifetimes) in 
-the way they are supposed to be used. This article aimed to cover the basics of Rust ownership model, but it is not meant for Rust
+Eversince I started learning Rust I learned to use some computer science concepts (such as references or lifetimes) in 
+the way they are supposed to be used. This article aims to cover the basics of Rust ownership model, but it is not meant for Rust
 developers only. We barely scratched the surface, we will explore ownership even more in the upcoming posts.

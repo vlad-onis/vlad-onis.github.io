@@ -5,6 +5,8 @@ categories: [Rust]
 tags: [rust]
 ---
 
+# This document is still a DRAFT - WIP
+
 This blog post introduces the telemetry concept in Rust as described by Luca Palmieri in his book "Zero2Production". 
 
 > Disclaimer: This blogpost represents my personal notes and explanations of Zero2Production Telemetry chapter and should serve as a summary. No copyright intended.
@@ -43,7 +45,7 @@ The default crate for logging is called log (https://crates.io/crates/log) and i
     * error
 
 The log crate leverages the facade pattern which answers the question: What should we do with these logs?
-The facade pattern is just a fancy way of saying, the crate provides an interface (in this case the Log trait) which hides the complext implementation details of how the produces log entries will be used.
+The facade pattern is just a fancy way of saying, the crate provides an interface (in this case the Log trait) which hides the complex implementation details of how the produced log entries will be used.
 
 Let's look at a very simple example. Throughout the Telemetry series we will use the same app, so we might write the barebones now. It will be a simple app that tackles the subject of building houses or some other buildings.
 
