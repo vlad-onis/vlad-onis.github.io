@@ -1,5 +1,5 @@
 ---
-title: A borrow for a lifetime
+title: The borrow for a lifetime
 date: 2023-01-08 13:00:00
 categories: [Rust]
 tags: [rust]
