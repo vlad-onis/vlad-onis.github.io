@@ -69,7 +69,7 @@ The diagram below oversimplifies the protocol to better understand the concept.
 
 ## Hands on TLS
 
-Initially I envisioned this post as a ![Tokio-Rustls](https://docs.rs/tokio-rustls/latest/tokio_rustls/) example but the high level concepts already transformed it in a wall of text. For those of you that want to explore the hands on bit please follow the Readme from **[this repository](https://github.com/vlad-onis/tls_showcase)**. It will walk you through generating, signing trusting and using digital certificates using 2 approaches: mkcert and openssl. The playground is a client-server application implemented with Tokio-Rustls.
+Initially I envisioned this post as a [Tokio-Rustls](https://docs.rs/tokio-rustls/latest/tokio_rustls/) example but the high level concepts already transformed it in a wall of text. For those of you that want to explore the hands on bit please follow the Readme from **[this repository](https://github.com/vlad-onis/tls_showcase)**. It will walk you through generating, signing trusting and using digital certificates using 2 approaches: mkcert and openssl. The playground is a client-server application implemented with Tokio-Rustls.
 
 ## Outro
 
