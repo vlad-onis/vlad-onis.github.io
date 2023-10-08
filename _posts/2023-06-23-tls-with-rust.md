@@ -5,7 +5,7 @@ categories: [Rust]
 tags: [rust]
 ---
 
-This blog post explores the basics of the TLS (Transport Later Security) protocol. Have you ever wondered how those certs work exactly and how to use them? This post explores the theoretical concepts behind TLS, made easy, and it provides you with a TLS walkthrough Rust application.
+This blog post explores the basics of the TLS (Transport Layer Security) protocol. Have you ever wondered how those certs work exactly and how to use them? This post explores the theoretical concepts behind TLS, made easy, and it provides you with a TLS walkthrough Rust application.
 
 > Disclaimer: This post will not explore the internals of any cryptographic algorithm
 {: .prompt-danger }
