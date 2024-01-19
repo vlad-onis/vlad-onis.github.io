@@ -284,8 +284,8 @@ In the Annex below you can find the entire code of my main file so you can go th
 There is still a lot left to do. 
 
 * We want to be able to configure turbine from outside through config files
-* Rethink the component design a bit decoupling responsibilities a bit more by adding a Path Resolver
-* We want to stop having a series turbine and move forward to a parallel turbine (electronics joke lol 📺). But in all seriousness turbine is now single threaded so to wrap it up we'll need to load test it and parallelise it
+* Rethink the component design a bit to decouple responsibilities more by adding an HttpPath Resolver
+* We want to stop having a series turbine and move forward to a parallel turbine (electronics joke lol 📺). But in all seriousness turbine is now single threaded so to wrap it up we'll need to load test it and parallelize it
 
 
 ## Outro
