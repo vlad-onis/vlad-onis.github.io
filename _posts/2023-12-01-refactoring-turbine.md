@@ -5,21 +5,24 @@ categories: [Rust, Web Servers]
 tags: [rust]
 ---
 
-So here we are again, trying to build this little turbine. Before advancing in our quest we should refactor it and not allow tech debt to pile up. 
+So here we are again, trying to build this little turbine. This is the second post in this series of posts. Turbine is a didactic webserver meant to teach us Rust along side generic computer science knowledge. For a proper introduction please check [part 1 - The birth of Turbine](https://vlad-onis.github.io/posts/birth-of-turbine/)
 
-"Refactoring already?? But we barely wrote 5 lines of code", you may say. You see, a Lanister always pays his (tech) debt. Besides, that's a really fun way to leverage Rust's type system and make turbine more reliable. 
+
+Before advancing in our quest we should refactor it and not allow tech debt to pile up. 
+
+"Refactoring already?? But we barely wrote 5 lines of code", you might say. You see, a Lanister always pays his (tech) debt. Besides, that's a really fun way to leverage Rust's type system and make turbine more reliable. 
 
 <img src="/assets/img/the_birth_of_turbine/turbine.png" width="400" height="200" style="border-radius:25% 50%;">
 
 ## Refactoring
 
-To keep it short this time as well we want to just tackle the decoupling of reading and writing and sprinkle some more Rust types along the way.
+To keep it short this time as well, we want to just tackle the decoupling of reading and writing and sprinkle some more Rust types along the way.
 
-Let's consider the code from part 1 a single function. You will quickly notice that the function reads from the stream and creates the request object and in the second chunk of code we parse the request extracting the resource from it.
+Let's consider the code from part 1(todo make this a link) a single function. You will quickly notice that the function reads from the stream, creates the request object and in the second chunk of code we parse the request extracting the resource from it.
 
 Let's move the http related bits to a new module (we can call it http.rs for example).
 
-First step we need the methods that we can serve. We can use **enum** in this case as a request can't be both Get and Post at the same time. Yes we only use these 2 methods for now to keep it simple stupid.
+First step we need the methods that we can serve. We can use **enum** in this case as a request can't be both Get and Post at the same time. Yes we only use these 2 methods for now to keep it simple, stupid. 😬
 
 ```rust
 #[derive(Debug)]
@@ -40,7 +43,7 @@ pub struct Request {
 ```
 And now suddenly the Headers type just popped up. Feels like we're really designing something 🦀
 
-Like we learned in the previous post, headers will contain the 3 words space separated - method, resource, version. And then any other headers.
+Like we learned in the previous post, headers will contain the 3 words space separated - method, resource, version. And then any other possible header.
  [List of valid headers and their meaning](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields)
 
 ```rust
@@ -198,7 +201,7 @@ impl TryFrom<PathBuf> for HttpPath {
 }
 ```
 
-Let's quickly discuss the new type in there HttpPath. You can see it's just a wrapper over simple path type, why do we need it. Well you see this type implements the TryFrom<PathBuf> trait which will try to figure out what resource the server should serve. Our resources will live as we'll see later in a resources folder. What if the client requests something outside that folder? A lot of malicious stuff can happen. 
+Let's quickly discuss the new type in there HttpPath. You can see it's just a wrapper over simple path type, why do we need it? This type implements the TryFrom<PathBuf> trait which will try to figure out what resource the server should serve. Our resources will live as we'll see later in a resources folder. What if the client requests something outside that folder? A lot of malicious stuff can happen. 
 
 ```bash
 # With this request the client can try to request files outside our document root
@@ -238,6 +241,7 @@ fn read_stream_content_to_end(stream: &mut TcpStream) -> Result<http::Request, h
 ```
 
 Parsing the request becomes very simple. Read it and return the resource.
+the parse_request should return the new object HttpPath but for simplicity we'll leave that for a later post when we will try to ensure that the path is valid and inside document root.
 
 ```rust
 fn parse_request(stream: &mut TcpStream) -> Result<String, ParseError> {
@@ -256,7 +260,7 @@ fn serve_file(mut stream: TcpStream) -> Result<(), ServerError> {
     let resource = parse_request(&mut stream)?;
     println!("Parsed Resource : {:?}", resource);
 
-    let file_content = fs::read_to_string("index.html")?;
+    let file_content = fs::read_to_string(resource.as_str())?;
     let content_length = file_content.len() + END_OF_CONTENT.len();
 
     stream.write_all(HEADER_STATUS.as_bytes())?;
@@ -275,6 +279,13 @@ fn serve_file(mut stream: TcpStream) -> Result<(), ServerError> {
 ```
 
 In the Annex below you can find the entire code of my main file so you can go through it once more and test it for yourself.
+
+## Next steps
+There is still a lot left to do. 
+
+* We want to be able to configure turbine from outside through config files
+* Rethink the component design a bit decoupling responsibilities a bit more by adding a Path Resolver
+* We want to stop having a series turbine and move forward to a parallel turbine (electronics joke lol 📺). But in all seriousness turbine is now single threaded so to wrap it up we'll need to load test it and parallelise it
 
 
 ## Outro
