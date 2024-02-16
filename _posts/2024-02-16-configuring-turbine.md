@@ -18,7 +18,7 @@ What do I even mean by configuring? Turbine currently is pretty hardcoded so if 
 What could be a good thing to configure as a first step?
 You may have noticed that in the previous post we were serving files from a certain path and we were even talking about the threat of serving from the wrong place. This path is usually called "the document root". Let's use this for our config, we want the user to be able to choose a document root for his webserver.
 
-We will use (clap)[https://crates.io/crates/clap] which allows you to create command line parsers declaratively or procedurally. We will send the config_file as cli argument at server startup.
+We will use [clap](https://crates.io/crates/clap) which allows you to create command line parsers declaratively or procedurally. We will send the config_file as cli argument at server startup.
 
 I created a new module and called it config.rs, let's break it down.
 
@@ -102,7 +102,7 @@ impl Config {
 
 ```
 
-As you can observe, we are creating this new Config struct. Upon creation we validate that the config_file is actually valid, we read it and we construct the Config object. This operation can fail on file reading, on toml deserialisation or if the config_file does not exist at all. To avoid complex error handling for now, (the anyhow crate)[https://crates.io/crates/anyhow] is used to abstract away this complexity.
+As you can observe, we are creating this new Config struct. Upon creation we validate that the config_file is actually valid, we read it and we construct the Config object. This operation can fail on file reading, on toml deserialisation or if the config_file does not exist at all. To avoid complex error handling for now, [the anyhow crate](https://crates.io/crates/anyhow) is used to abstract away this complexity.
 
 Here's the toml config file as an example
 ```toml
@@ -194,7 +194,7 @@ impl Resolver {
 
 ### Wrapup
 
-I think this wraps up the first part of our journey - The (single threaded) Turbine. It was a joy to explore the basics of webservers with you up to this point. You can find all the code up to this point with comments everywhere on (this branch)[https://github.com/vlad-onis/turbine/tree/task/sync_single_thread_turbine]
+I think this wraps up the first part of our journey - The (single threaded) Turbine. It was a joy to explore the basics of webservers with you up to this point. You can find all the code up to this point with comments everywhere on [this branch](https://github.com/vlad-onis/turbine/tree/task/sync_single_thread_turbine)
 
 We still have a few things to do, here's the plan:
 * Load test our turbine
