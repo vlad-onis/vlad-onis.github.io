@@ -192,7 +192,7 @@ impl Resolver {
 }
 ```
 
-### Wrapup
+### Wrap up
 
 I think this wraps up the first part of our journey - The (single threaded) Turbine. It was a joy to explore the basics of webservers with you up to this point. You can find all the code up to this point with comments everywhere on [this branch](https://github.com/vlad-onis/turbine/tree/task/sync_single_thread_turbine)
 
