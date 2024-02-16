@@ -14,6 +14,12 @@ Before advancing in our quest we should refactor it and not allow tech debt to p
 
 <img src="/assets/img/the_birth_of_turbine/turbine.png" width="400" height="200" style="border-radius:25% 50%;">
 
+## Introduction
+
+We did a quick recap of what turbine is, let's also take a look at this graphic representation of what we want to achieve. The steps are pretty much the same as before but I want you to have them in mind while we refactor Turbine.
+
+<img src="/assets/img/refactoring_turbine_resources/turbine_refactor_flow.png" width="250" height="200">
+
 ## Refactoring
 
 To keep it short this time as well, we want to just tackle the decoupling of reading and writing and sprinkle some more Rust types along the way.
